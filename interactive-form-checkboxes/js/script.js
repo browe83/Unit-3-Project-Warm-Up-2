@@ -31,22 +31,34 @@ document.querySelector('.options').addEventListener('change', (e) => {
 
   // 1) Create a variable named clicked to store the checkbox input that was just clicked
   //    - `e.target` will be helpful here
-
   // 2) Create a variable named clickedType to store the `data-type` attribute of the checkbox that was just clicked
   //    - the `getAttribute` method will be helpful here
-
   // 3) Log out the two variables you just created to confirm their values
-
+  const clicked = e.target; 
+  const clickedType = clicked.getAttribute('data-type');
+  
   // 4) Use the `checkboxes` variable that was created for you above, and a `for` loop to iterate over all the checkbox input elements
   // 5) In the loop, create a variable named `checkboxType` to store the `data-type` attribute of the `checkboxes[i]` in the loop's current iteration
-  
-  // 6) Create an `if` statement to check which items to disable/enable.  Two conditions need to be checked: 
-  //    - We only want to disable/enable the item if it in the same list is the selection, 
-  //    - So check that the clicked checkbox and the checkbox at the loop's current iteration have the same type
-  //    AND
-  //    - We don't want to disable/enable the checkbox that was just clicked
-  //    - So check that the clicked checkbox is not the checkbox in the loop's current iteration
-  //    - That will look something like this - `(clickedType === checkboxType && clicked !== checkboxes[i])`
+  for (let i =0; i < checkboxes.length; i++) {
+    
+    const checkboxType = checkboxes[i].getAttribute('data-type');
+    
+    // 6) Create an `if` statement to check which items to disable/enable.  Two conditions need to be checked: 
+    //    - We only want to disable/enable the item if it in the same list is the selection, 
+    //    - So check that the clicked checkbox and the checkbox at the loop's current iteration have the same type
+    //    AND
+    //    - We don't want to disable/enable the checkbox that was just clicked
+    //    - So check that the clicked checkbox is not the checkbox in the loop's current iteration
+    //    - That will look something like this - `(clickedType === checkboxType && clicked !== checkboxes[i])`
+    if (clickedType === checkboxType && clicked !== checkboxes[i]) {
+          if (clicked.checked) {
+            checkboxes[i].disabled=true; 
+          } else {
+            checkboxes[i].disabled=false;
+          }
+    }
+
+  }
 
   // 7) In the `if` statement, create an `if/else` statement to check one condition:
   //    - If the clicked checkbox is checked or unchecked
